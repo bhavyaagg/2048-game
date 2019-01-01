@@ -1,0 +1,13 @@
+table {
+    border-spacing: 0;
+}
+
+td{
+    height: 50px;
+    width: 50px;
+    border: solid black 1px;
+    text-align: center;
+    vertical-align: bottom;
+    font-size: 35px;
+    line-height: 54px;
+}
