@@ -13,6 +13,23 @@ gameArray[randomIndex] = 2;
 updateTable()
 
 
+document.addEventListener('keydown', function(event) {
+  switch (event.key) {
+    case "ArrowDown":
+      console.log("Down")
+      break
+    case "ArrowUp":
+      console.log("Up")
+      break
+    case "ArrowLeft":
+      console.log("Left")
+      break
+    case "ArrowRight":
+      console.log("Right")
+      break
+  }
+})
+
 function updateTable() {
   for (let i = 0; i < 16; i++) {
     tdElements[i].innerText = gameArray[i] === 0 ? "" : gameArray[i];
