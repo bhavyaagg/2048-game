@@ -2,18 +2,9 @@
 let gameArray = []
 let tdElements = []
 
-for (let i = 0; i < 16; i++) {
-  gameArray[i] = 0;
-  tdElements[i] = document.getElementById(`td${i}`)
-}
+init()
 
-let randomIndex = Math.floor(Math.random() * 16)
-gameArray[randomIndex] = 2;
-
-updateTable()
-
-
-document.addEventListener('keydown', function(event) {
+document.addEventListener('keydown', function (event) {
   switch (event.key) {
     case "ArrowDown":
       console.log("Down")
@@ -29,6 +20,17 @@ document.addEventListener('keydown', function(event) {
       break
   }
 })
+
+function init() {
+  for (let i = 0; i < 16; i++) {
+    gameArray[i] = 0;
+    tdElements[i] = document.getElementById(`td${i}`)
+  }
+
+  let randomIndex = Math.floor(Math.random() * 16)
+  gameArray[randomIndex] = 2;
+  updateTable()
+}
 
 function updateTable() {
   for (let i = 0; i < 16; i++) {
