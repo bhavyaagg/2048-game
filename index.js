@@ -25,9 +25,10 @@ function init() {
     gameArray[i] = 0;
     tdElements[i] = document.getElementById(`td${i}`)
   }
-
-  addRandomNumber()
-  updateTable()
+  if (checkIfBoardPlaceIsEmpty()) {
+    addRandomNumber()
+    updateTable()
+  }
 }
 
 function handleDown() {
@@ -71,8 +72,12 @@ function handleDown() {
       currRow--;
     }
   }
-  addRandomNumber()
-  updateTable()
+
+  if (checkIfBoardPlaceIsEmpty()) {
+    addRandomNumber()
+    updateTable()
+  }
+
 
 }
 
@@ -83,18 +88,20 @@ function updateTable() {
 }
 
 function addRandomNumber() {
-  let i;
-  for (i = 0; i < 16; i++) {
-    if (gameArray[i] === 0) {
-      break;
-    }
-  }
-  if (i === 16) {
-    return;
-  }
+
   let randomIndex = Math.floor(Math.random() * 16)
   while (gameArray[randomIndex] !== 0) {
     randomIndex = Math.floor(Math.random() * 16)
   }
   gameArray[randomIndex] = 2;
+}
+
+function checkIfBoardPlaceIsEmpty() {
+  let i;
+  for (i = 0; i < 16; i++) {
+    if (gameArray[i] === 0) {
+      return true;
+    }
+  }
+  return false;
 }
