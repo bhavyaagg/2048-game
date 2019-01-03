@@ -6,10 +6,12 @@ init()
 document.addEventListener('keydown', function (event) {
   switch (event.key) {
     case "ArrowDown":
+      console.log("Down")
       handleDown()
       break
     case "ArrowUp":
       console.log("Up")
+      handleUp()
       break
     case "ArrowLeft":
       console.log("Left")
@@ -25,6 +27,53 @@ function init() {
     gameArray[i] = 0;
     tdElements[i] = document.getElementById(`td${i}`)
   }
+  if (checkIfBoardPlaceIsEmpty()) {
+    addRandomNumber()
+    updateTable()
+  }
+}
+
+function handleUp() {
+  for (let col = 0; col < 4; col++) {
+    let currRow = 0;
+
+    while (currRow < 3) {
+      if (gameArray[currRow * 4 + col] !== 0) {
+        let nextRow = currRow + 1;
+        while (nextRow <= 3) {
+          if (gameArray[nextRow * 4 + col] === 0) {
+            nextRow++;
+          } else if (gameArray[currRow * 4 + col] !== gameArray[nextRow * 4 + col]) {
+            break;
+          } else if (gameArray[currRow * 4 + col] === gameArray[nextRow * 4 + col]) {
+            gameArray[currRow * 4 + col] += gameArray[currRow * 4 + col]
+            gameArray[nextRow * 4 + col] = 0;
+            break;
+          }
+        }
+      }
+      currRow++;
+    }
+
+  }
+  for (let col = 0; col < 4; col++) {
+    let currRow = 1;
+    while (currRow <= 3) {
+      if (gameArray[currRow * 4 + col] !== 0) {
+        let nextRow = currRow - 1;
+        while (nextRow >= 0 && gameArray[nextRow * 4 + col] === 0) {
+          nextRow--;
+        }
+        nextRow++;
+        if (nextRow >= 0 && gameArray[nextRow * 4 + col] === 0) {
+          gameArray[nextRow * 4 + col] = gameArray[currRow * 4 + col];
+          gameArray[currRow * 4 + col] = 0;
+        }
+      }
+      currRow++;
+    }
+  }
+
   if (checkIfBoardPlaceIsEmpty()) {
     addRandomNumber()
     updateTable()
