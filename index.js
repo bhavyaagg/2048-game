@@ -27,10 +27,7 @@ function init() {
     gameArray[i] = 0;
     tdElements[i] = document.getElementById(`td${i}`)
   }
-  if (checkIfBoardPlaceIsEmpty()) {
-    addRandomNumber()
-    updateTable()
-  }
+  moveToNextTurn()
 }
 
 function handleUp() {
@@ -74,10 +71,7 @@ function handleUp() {
     }
   }
 
-  if (checkIfBoardPlaceIsEmpty()) {
-    addRandomNumber()
-    updateTable()
-  }
+  moveToNextTurn()
 }
 
 function handleDown() {
@@ -122,12 +116,14 @@ function handleDown() {
     }
   }
 
+  moveToNextTurn()
+}
+
+function moveToNextTurn() {
   if (checkIfBoardPlaceIsEmpty()) {
     addRandomNumber()
     updateTable()
   }
-
-
 }
 
 function updateTable() {
