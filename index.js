@@ -15,6 +15,7 @@ document.addEventListener('keydown', function (event) {
       break
     case "ArrowLeft":
       console.log("Left")
+      handleLeft()
       break
     case "ArrowRight":
       console.log("Right")
@@ -118,6 +119,51 @@ function handleDown() {
 
   moveToNextTurn()
 }
+
+function handleLeft() {
+  for (let row = 0; row < 4; row++) {
+    let currCol = 0;
+
+    while (currCol < 3) {
+      if (gameArray[row * 4 + currCol] !== 0) {
+        let nextCol = currCol + 1;
+        while (nextCol <= 3) {
+          if (gameArray[row * 4 + nextCol] === 0) {
+            nextCol++;
+          } else if (gameArray[row * 4 + currCol] !== gameArray[row * 4 + nextCol]) {
+            break;
+          } else if (gameArray[row * 4 + currCol] === gameArray[row * 4 + nextCol]) {
+            gameArray[row * 4 + currCol] += gameArray[row * 4 + currCol]
+            gameArray[row * 4 + nextCol] = 0;
+            break;
+          }
+        }
+      }
+      currCol++;
+    }
+
+  }
+  for (let row = 0; row < 4; row++) {
+    let currCol = 1;
+    while (currCol <= 3) {
+      if (gameArray[row * 4 + currCol] !== 0) {
+        let nextCol = currCol - 1;
+        while (nextCol >= 0 && gameArray[row * 4 + nextCol] === 0) {
+          nextCol--;
+        }
+        nextCol++;
+        if (nextCol >= 0 && gameArray[row * 4 + nextCol] === 0) {
+          gameArray[row * 4 + nextCol] = gameArray[row * 4 + currCol];
+          gameArray[row * 4 + currCol] = 0;
+        }
+      }
+      currCol++;
+    }
+  }
+
+  moveToNextTurn()
+}
+
 
 function moveToNextTurn() {
   if (checkIfBoardPlaceIsEmpty()) {
